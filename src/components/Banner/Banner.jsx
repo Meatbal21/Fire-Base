@@ -2,11 +2,14 @@ import React, {useEffect, useState} from 'react'
 import './Banner.css'
 import { collection, getDocs, limit, orderBy, query } from '@firebase/firestore'
 import {db} from '../../config/firebaseConfig'
+import { useNavigate } from 'react-router-dom'
 
 const Banner = () => {
 
   const [mainArticle, setMainArticle] = useState([]);
   const [otherArticles, setOtherArticles] = useState([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
 
@@ -39,7 +42,9 @@ const Banner = () => {
 
   return (
     <div className='banner-container'>
-      <div className="main-article container" style={{backgroundImage:`url(${mainArticle?.imageURL})`}}>
+      <div className="main-article container" 
+      onClick={()=> navigate(`/article/${mainArticle?.id}`)}
+      style={{backgroundImage:`url(${mainArticle?.imageURL})`}}>
           <div className="banner-info">
               <h2>{mainArticle?.title}</h2>
               <div className="main-article-info">
@@ -51,7 +56,9 @@ const Banner = () => {
       <div className="other-articles-container">
         {
           otherArticles.map(item => {
-            return <div key={item?.id} className="other-article-item"
+            return <div key={item?.id} 
+            className="other-article-item"
+            onClick={()=> navigate(`/article/${item?.id}`)}
             style={{backgroundImage: `url(${item?.imageURL})`}}>
                 <div className="banner-info">
                   <h3>{item?.title}</h3>
