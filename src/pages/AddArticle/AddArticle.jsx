@@ -58,8 +58,10 @@ const AddArticle = () => {
             });
           });
         }).then(res=>{
-          toast('Article saved successfully', {type: "success", autoClose: 2000,
-        });
+          toast('Article saved successfully', 
+          {type: "success", 
+          autoClose: 2000,}
+          );
         setTimeout(()=>{
           navigate('/');
         }, 2000);
